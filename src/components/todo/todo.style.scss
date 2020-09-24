@@ -1,0 +1,28 @@
+.todo-container {
+  display: flex;
+  width: 50vw;
+  padding: 15px 20px;
+  align-items: center;
+  border: 1px dotted rgb(197, 197, 197);
+  margin: 0 auto;
+
+  i {
+    color: #ff007f;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+
+  input {
+    width: 5%;
+    cursor: pointer;
+
+    &:checked ~ .text {
+      text-decoration: line-through;
+    }
+  }
+
+  .text {
+    width: 80%;
+    margin-left: 10px;
+  }
+}

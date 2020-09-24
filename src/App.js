@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import NewTodo from './components/new-todo/new-todo.component';
+import TodoList from './components/todo-list/todo-list.component';
+
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      tasks: [],
+    };
+  }
+
+  handleState = (task) => {
+    this.setState({ tasks: this.state.tasks.concat([task]) });
+  };
+
+  handleDelete = (e) => {
+    const taskName =
+      e.target.previousElementSibling.previousElementSibling.innerText;
+    this.setState({
+      tasks: this.state.tasks.filter((task) => task !== taskName),
+    });
+  };
+
+  render() {
+    const { tasks } = this.state;
+    return (
+      <>
+        <div className='bg' />
+        <NewTodo handleState={this.handleState} />
+        <TodoList tasks={tasks} handleDelete={this.handleDelete} />
+      </>
+    );
+  }
 }
 
 export default App;

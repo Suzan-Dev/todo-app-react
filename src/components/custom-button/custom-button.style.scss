@@ -1,0 +1,26 @@
+button {
+  border: 2px solid #ff007f;
+  padding: 10px 40px;
+  font-weight: bold;
+  background-color: #ff007f;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #e40072;
+  }
+
+  &.save-btn {
+    padding: 10px 15px;
+    color: #ff007f;
+    background-color: white;
+
+    &:hover {
+      background-color: #ff007f;
+      color: white;
+    }
+  }
+}
