@@ -1,53 +1,46 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 
 import './new-todo.style.scss';
 
 import CustomInput from '../custom-input/custom-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-class NewTodo extends React.Component {
-  constructor() {
-    super();
+import { TodoAppContext } from '../../contexts/todo-app.context';
 
-    this.state = {
-      currentTask: '',
-    };
-  }
+const NewTodo = () => {
+  const [currentTask, setCurrentTask] = useState('');
+  const { maintainTask } = useContext(TodoAppContext);
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const value = e.target.value;
-    this.setState({ currentTask: value });
+    setCurrentTask(value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { handleState } = this.props;
-    const { currentTask } = this.state;
 
     if (currentTask.trim()) {
-      handleState(currentTask);
+      maintainTask(currentTask);
 
-      this.setState({ currentTask: '' });
+      setCurrentTask('');
     } else {
       alert('Enter a new Task!');
     }
   };
 
-  render() {
-    return (
-      <div className='new-todo'>
-        <p className='title'>New Todo:</p>
-        <form className='form' onSubmit={this.handleSubmit}>
-          <CustomInput
-            type='text'
-            value={this.state.currentTask}
-            handleChange={this.handleChange}
-          />
-          <CustomButton>Add</CustomButton>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className='new-todo'>
+      <p className='title'>New Todo:</p>
+      <form className='form' onSubmit={handleSubmit}>
+        <CustomInput
+          type='text'
+          value={currentTask}
+          handleChange={handleChange}
+        />
+        <CustomButton>Add</CustomButton>
+      </form>
+    </div>
+  );
+};
 
 export default NewTodo;
