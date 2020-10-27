@@ -1,11 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useContext } from 'react';
 
 import './todo.style.scss';
 
-import { deleteTask } from '../../redux/todo/todo.action';
+import { TodoAppContext } from '../../contexts/todo-app.context';
 
-const Todo = ({ name, handleEdit, deleteTask }) => {
+const Todo = ({ name, handleEdit }) => {
+  const { deleteTask } = useContext(TodoAppContext);
+
   return (
     <div className='todo-container'>
       <input type='checkbox' />
@@ -16,8 +17,4 @@ const Todo = ({ name, handleEdit, deleteTask }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  deleteTask: (event) => dispatch(deleteTask(event)),
-});
-
-export default connect(null, mapDispatchToProps)(Todo);
+export default Todo;

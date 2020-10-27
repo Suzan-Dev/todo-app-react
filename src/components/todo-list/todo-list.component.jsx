@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-
-import { deleteTask } from '../../redux/todo/todo.action';
+import React, { useState, useContext } from 'react';
 
 import './todo-list.style.scss';
 
@@ -9,11 +6,14 @@ import CustomInput from '../custom-input/custom-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import Todo from '../todo/todo.component';
 
-const TodoList = ({ tasks, deleteTask }) => {
+import { TodoAppContext } from '../../contexts/todo-app.context';
+
+const TodoList = () => {
   const [mutatedTask, setMutatedTask] = useState({
     selectedTask: '',
     editedTask: '',
   });
+  const { deleteTask, tasks } = useContext(TodoAppContext);
 
   const { selectedTask, editedTask } = mutatedTask;
 
@@ -62,12 +62,4 @@ const TodoList = ({ tasks, deleteTask }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  tasks: state.todo.tasks,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  deleteTask: (task) => dispatch(deleteTask(task)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useContext } from 'react';
 
 import './new-todo.style.scss';
-
-import { editTask } from '../../redux/todo/todo.action';
 
 import CustomInput from '../custom-input/custom-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-const NewTodo = ({ editTask }) => {
+import { TodoAppContext } from '../../contexts/todo-app.context';
+
+const NewTodo = () => {
   const [currentTask, setCurrentTask] = useState('');
+  const { maintainTask } = useContext(TodoAppContext);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -20,7 +20,7 @@ const NewTodo = ({ editTask }) => {
     e.preventDefault();
 
     if (currentTask.trim()) {
-      editTask(currentTask);
+      maintainTask(currentTask);
 
       setCurrentTask('');
     } else {
@@ -43,8 +43,4 @@ const NewTodo = ({ editTask }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  editTask: (task) => dispatch(editTask(task)),
-});
-
-export default connect(null, mapDispatchToProps)(NewTodo);
+export default NewTodo;
