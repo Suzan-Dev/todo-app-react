@@ -4,6 +4,6 @@ export const removeTask = (tasks, e) => {
   return tasks.filter((task) => task !== taskName);
 };
 
-export const editTask = (tasks, task) => {
+export const handleTask = (tasks, task) => {
   return tasks.concat([task]);
 };
